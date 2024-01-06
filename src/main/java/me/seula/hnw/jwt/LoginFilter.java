@@ -20,12 +20,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JwtUtil jwtUtil;
 
     public LoginFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil) {
+
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
     }
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+
         String username = obtainUsername(request);
         String password = obtainPassword(request);
 
@@ -50,11 +52,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = jwtUtil.createToken(username, role, 60 * 60 * 10L);
 
         response.addHeader("Authorization", "Bearer " + token);
-
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
+
         response.setStatus(401);
     }
 }
