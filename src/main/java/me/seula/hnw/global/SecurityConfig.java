@@ -1,6 +1,8 @@
 package me.seula.hnw.global;
 
-import me.seula.hnw.jwt.JwtAuthenticationFilter;
+import io.jsonwebtoken.Jwt;
+import me.seula.hnw.jwt.JwtFilter;
+import me.seula.hnw.jwt.LoginFilter;
 import me.seula.hnw.jwt.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,7 +51,9 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-        http.addFilterAt(new JwtAuthenticationFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class);
+
+        http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);
 
         http.sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
