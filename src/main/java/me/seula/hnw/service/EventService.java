@@ -29,11 +29,13 @@ public class EventService {
     public void createEvent(EventDTO eventDTO) {
         String eventName = eventDTO.getEventName();
         String eventDesc = eventDTO.getEventDesc();
+        String companyName = eventDTO.getCompanyName();
 
         EventEntity eventEntity = new EventEntity();
 
         eventEntity.setEventName(eventName);
         eventEntity.setEventDesc(eventDesc);
+        eventEntity.setCompanyName(companyName);
 
         eventRepository.save(eventEntity);
     }

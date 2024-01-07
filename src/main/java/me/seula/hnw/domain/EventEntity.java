@@ -20,4 +20,6 @@ public class EventEntity {
 
     private String eventDesc;
 
+    private String companyName;
+
 }

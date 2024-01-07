@@ -11,4 +11,6 @@ public class EventDTO {
 
     private String eventDesc;
 
+    private String companyName;
+
 }
