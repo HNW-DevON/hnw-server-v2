@@ -39,7 +39,7 @@ public class UserService {
         data.setPassword(bCryptPasswordEncoder.encode(password));
         data.setName(name);
         data.setBirth(birth);
-        data.setRole("ADMIN");
+        data.setRole("ROLE_USER");
 
         userRepository.save(data);
     }
