@@ -6,6 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CompanyDTO {
+
     private String companyName;
+
     private String companyAddress;
+
 }
