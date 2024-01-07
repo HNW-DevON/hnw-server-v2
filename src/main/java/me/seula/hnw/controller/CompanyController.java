@@ -31,14 +31,14 @@ public class CompanyController {
     public CompanyEntity getCompany(@PathVariable("companyName") String companyName) {
         return companyService.getCompany(companyName);
     }
+    @GetMapping("/company/{companyName}/products")
+    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") String companyName) {
+        return productService.getCompanyProduct(companyName);
+    }
 
     @PostMapping("/company/create")
     public void createCompany(CompanyDTO companyDTO) {
         companyService.createCompany(companyDTO);
     }
 
-    @GetMapping("/company/{companyName}/products")
-    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") String companyName) {
-        return productService.getCompanyProduct(companyName);
-    }
 }

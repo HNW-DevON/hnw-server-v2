@@ -1,6 +1,5 @@
 package me.seula.hnw.global;
 
-import io.jsonwebtoken.Jwt;
 import me.seula.hnw.jwt.JwtFilter;
 import me.seula.hnw.jwt.LoginFilter;
 import me.seula.hnw.jwt.JwtUtil;
@@ -20,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -55,7 +55,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/login", "/register").permitAll()
-                .requestMatchers("/company").hasRole("USER")
+                .requestMatchers("/company", "/product", "/quest").hasRole("USER")
                 .anyRequest().authenticated()
         );
 
@@ -71,7 +71,7 @@ public class SecurityConfig {
     public CorsConfigurationSource apiConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(Arrays.asList("https://api.example.com"));
+        configuration.setAllowedOrigins(List.of("https://api.example.com"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
