@@ -17,9 +17,25 @@ public class QuestEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /*
+        퀘스트 이름
+    */
     private String questName;
 
+    /*
+        퀘스트 설명
+    */
     private String questDesc;
+
+    /*
+        현재 깬 사람 수
+    */
+    private String current;
+
+    /*
+        퀘스트 인원 수
+    */
+    private String limit;
 
     @Builder
     public QuestEntity(String questName, String questDesc) {

@@ -7,10 +7,19 @@ import lombok.Setter;
 @Setter
 public class EventDTO {
 
+    /*
+        이벤트 이름
+    */
     private String eventName;
 
+    /*
+        이벤트 설명
+    */
     private String eventDesc;
 
+    /*
+        개최 회사 이름
+    */
     private String companyName;
 
 }

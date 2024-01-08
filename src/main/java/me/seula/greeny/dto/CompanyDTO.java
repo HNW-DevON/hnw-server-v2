@@ -7,8 +7,14 @@ import lombok.Setter;
 @Setter
 public class CompanyDTO {
 
+    /*
+        회사 이름
+    */
     private String companyName;
 
+    /*
+        회사 주소
+     */
     private String companyAddress;
 
 }

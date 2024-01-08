@@ -13,8 +13,14 @@ public class CompanyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /*
+        회사 이름
+    */
     private String companyName;
 
+    /*
+        회사 주소
+    */
     private String companyAddress;
 
     @Builder
