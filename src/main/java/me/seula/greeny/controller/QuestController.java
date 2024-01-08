@@ -23,12 +23,12 @@ public class QuestController {
     }
 
     @GetMapping("/quest/{questId}")
-    public QuestEntity getProduct(@PathVariable("questId") int questId) {
+    public QuestEntity getQuest(@PathVariable("questId") int questId) {
         return questService.getQuest(questId);
     }
 
     @PostMapping("/quest/create")
-    public void createProduct(QuestDTO questDTO) {
+    public void createQuest(QuestDTO questDTO) {
         questService.createQuest(questDTO);
     }
 }
