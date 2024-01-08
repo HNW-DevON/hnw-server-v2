@@ -4,12 +4,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
 public class QuestEntity {
 
     @Id
@@ -20,4 +21,9 @@ public class QuestEntity {
 
     private String questDesc;
 
+    @Builder
+    public QuestEntity(String questName, String questDesc) {
+        this.questName = questName;
+        this.questDesc = questDesc;
+    }
 }

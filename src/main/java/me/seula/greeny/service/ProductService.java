@@ -25,21 +25,16 @@ public class ProductService {
     }
 
     public ProductEntity getProduct(String productName) {
-        return productRepository.findByProductName(productName);
+        return productRepository.findByProductName(productName).get();
     }
 
     public void createProduct(ProductDTO productDTO) {
-
-        ProductEntity productEntity = new ProductEntity();
-
-        String productName = productDTO.getProductName();
-        String productDesc = productDTO.getProductDesc();
-        String companyName = productDTO.getCompanyName();
-
-        productEntity.setProductName(productName);
-        productEntity.setProductDesc(productDesc);
-        productEntity.setCompanyName(companyName);
-
-        productRepository.save(productEntity);
+        productRepository.save(
+                ProductEntity.builder()
+                        .productName(productDTO.getProductName())
+                        .productDesc(productDTO.getProductDesc())
+                        .companyName(productDTO.getCompanyName())
+                        .build()
+        );
     }
 }

@@ -21,21 +21,14 @@ public class EventService {
     }
 
     public EventEntity getEvent(int eventId) {
-        return eventRepository.findById(eventId);
+        return eventRepository.findById(eventId).get();
     }
 
     public void createEvent(EventDTO eventDTO) {
-        String eventName = eventDTO.getEventName();
-        String eventDesc = eventDTO.getEventDesc();
-        String companyName = eventDTO.getCompanyName();
-
-        EventEntity eventEntity = new EventEntity();
-
-        eventEntity.setEventName(eventName);
-        eventEntity.setEventDesc(eventDesc);
-        eventEntity.setCompanyName(companyName);
-
-        eventRepository.save(eventEntity);
+        eventRepository.save(EventEntity.builder()
+                .eventName(eventDTO.getEventName())
+                .eventDesc(eventDTO.getEventDesc())
+                .build()
+        );
     }
-
 }

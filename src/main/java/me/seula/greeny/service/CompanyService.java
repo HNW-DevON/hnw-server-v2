@@ -17,7 +17,7 @@ public class CompanyService {
     private final CompanyRepository companyRepository;
 
     public CompanyEntity getCompany(String companyName) {
-        return companyRepository.findByCompanyName(companyName);
+        return companyRepository.findByCompanyName(companyName).get();
     }
 
     public List<CompanyEntity> getCompanyList() {
@@ -25,22 +25,16 @@ public class CompanyService {
     }
 
     public void createCompany(CompanyDTO companyDTO) {
-
         String companyName = companyDTO.getCompanyName();
-        String companyAddress = companyDTO.getCompanyAddress();
 
-
-        Boolean ifExist = companyRepository.existsByCompanyName(companyName);
-
-        if (ifExist) {
+        if (companyRepository.findByCompanyName(companyName).isPresent()) {
             return;
         }
 
-        CompanyEntity companyEntity = new CompanyEntity();
-
-        companyEntity.setCompanyName(companyName);
-        companyEntity.setCompanyAddress(companyAddress);
-
-        companyRepository.save(companyEntity);
+        companyRepository.save(CompanyEntity.builder()
+                .companyName(companyName)
+                .companyAddress(companyDTO.getCompanyAddress())
+                .build()
+        );
     }
 }

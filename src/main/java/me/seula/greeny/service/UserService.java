@@ -8,6 +8,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -18,24 +20,20 @@ public class UserService {
 
     public void register(RegisterDTO registerDTO) {
         String username = registerDTO.getUsername();
-        String password = registerDTO.getPassword();
-        String name = registerDTO.getName();
-        String birth = registerDTO.getBirth();
 
-        Boolean isExist = userRepository.existsByUsername(username);
-
-        if (isExist) {
+        if (userRepository.findByUsername(username).isPresent()) {
             return;
         }
 
-        UserEntity data = new UserEntity();
 
-        data.setUsername(username);
-        data.setPassword(bCryptPasswordEncoder.encode(password));
-        data.setName(name);
-        data.setBirth(birth);
-        data.setRole("ROLE_USER");
-
-        userRepository.save(data);
+        userRepository.save(
+                UserEntity.builder()
+                        .username(registerDTO.getUsername())
+                        .password(bCryptPasswordEncoder.encode(registerDTO.getPassword()))
+                        .name(registerDTO.getName())
+                        .birth(registerDTO.getBirth())
+                        .role("ROLE_USER")
+                        .build()
+        );
     }
 }

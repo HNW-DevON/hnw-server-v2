@@ -21,18 +21,14 @@ public class QuestService {
     }
 
     public QuestEntity getQuest(int questId) {
-        return questRepository.findById(questId);
+        return questRepository.findById(questId).get();
     }
 
     public void createQuest(QuestDTO questDTO) {
-        String questName = questDTO.getQuestName();
-        String questDesc = questDTO.getQuestDesc();
-
-        QuestEntity questEntity = new QuestEntity();
-
-        questEntity.setQuestName(questName);
-        questEntity.setQuestDesc(questDesc);
-
-        questRepository.save(questEntity);
+        questRepository.save(QuestEntity.builder()
+                .questName(questDTO.getQuestName())
+                .questDesc(questDTO.getQuestDesc())
+                .build()
+        );
     }
 }
