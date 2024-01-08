@@ -28,6 +28,8 @@ public class QuestService {
         questRepository.save(QuestEntity.builder()
                 .questName(questDTO.getQuestName())
                 .questDesc(questDTO.getQuestDesc())
+                .questCurrent(0)
+                .questLimit(questDTO.getLimit())
                 .build()
         );
     }

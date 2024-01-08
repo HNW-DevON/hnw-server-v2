@@ -1,16 +1,14 @@
 package me.seula.greeny.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestEntity {
 
     @Id
@@ -20,26 +18,32 @@ public class QuestEntity {
     /*
         퀘스트 이름
     */
+    @Column(nullable = false)
     private String questName;
 
     /*
         퀘스트 설명
     */
+    @Column(nullable = false)
     private String questDesc;
 
     /*
         현재 깬 사람 수
     */
-    private String current;
+    @Column(nullable = false)
+    private int questCurrent;
 
     /*
-        퀘스트 인원 수
+        인원 제한
     */
-    private String limit;
+    @Column(nullable = false)
+    private int questLimit;
 
     @Builder
-    public QuestEntity(String questName, String questDesc) {
+    public QuestEntity(String questName, String questDesc, int questCurrent, int questLimit) {
         this.questName = questName;
         this.questDesc = questDesc;
+        this.questCurrent = questCurrent;
+        this.questLimit = questLimit;
     }
 }
