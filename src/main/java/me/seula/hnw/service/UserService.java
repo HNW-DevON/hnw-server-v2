@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.UserEntity;
 import me.seula.hnw.dto.RegisterDTO;
 import me.seula.hnw.repository.UserRepository;
@@ -10,16 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userRepository = userRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     public void register(RegisterDTO registerDTO) {
         String username = registerDTO.getUsername();

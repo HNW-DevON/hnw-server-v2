@@ -1,5 +1,6 @@
 package me.seula.hnw.dto;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -7,13 +8,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
+@RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails {
 
     private final UserEntity userEntity;
-
-    public CustomUserDetails(UserEntity userEntity) {
-        this.userEntity = userEntity;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

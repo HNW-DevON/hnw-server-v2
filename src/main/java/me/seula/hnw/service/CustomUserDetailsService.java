@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.UserEntity;
 import me.seula.hnw.dto.CustomUserDetails;
 import me.seula.hnw.repository.UserRepository;
@@ -12,14 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-
-    @Autowired
-    public CustomUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

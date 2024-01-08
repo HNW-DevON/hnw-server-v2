@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.EventEntity;
 import me.seula.hnw.dto.EventDTO;
 import me.seula.hnw.repository.EventRepository;
@@ -10,13 +11,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class EventService {
 
     private final EventRepository eventRepository;
-
-    public EventService(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
 
     public List<EventEntity> getEventList() {
         return eventRepository.findAll();

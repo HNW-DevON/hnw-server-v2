@@ -1,9 +1,9 @@
 package me.seula.hnw.controller;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.ProductEntity;
 import me.seula.hnw.dto.ProductDTO;
 import me.seula.hnw.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,14 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    @Autowired
-    public ProductController(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping("/product")
     public List<ProductEntity> getAllProduct() {

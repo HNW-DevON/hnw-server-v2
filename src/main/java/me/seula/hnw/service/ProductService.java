@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.ProductEntity;
 import me.seula.hnw.dto.ProductDTO;
 import me.seula.hnw.repository.ProductRepository;
@@ -11,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class ProductService {
 
     private final ProductRepository productRepository;
-
-    @Autowired
-    public ProductService(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
 
     public List<ProductEntity> getAllProduct() {
         return productRepository.findAll();

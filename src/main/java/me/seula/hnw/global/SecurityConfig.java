@@ -1,5 +1,6 @@
 package me.seula.hnw.global;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.jwt.JwtFilter;
 import me.seula.hnw.jwt.LoginFilter;
 import me.seula.hnw.jwt.JwtUtil;
@@ -23,15 +24,11 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
     private final JwtUtil jwtUtil;
-
-    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration, JwtUtil jwtUtil) {
-        this.authenticationConfiguration = authenticationConfiguration;
-        this.jwtUtil = jwtUtil;
-    }
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {

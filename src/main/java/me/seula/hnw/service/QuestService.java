@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.QuestEntity;
 import me.seula.hnw.dto.QuestDTO;
 import me.seula.hnw.repository.QuestRepository;
@@ -11,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class QuestService {
 
     private final QuestRepository questRepository;
-
-    @Autowired
-    public QuestService(QuestRepository questRepository) {
-        this.questRepository = questRepository;
-    }
 
     public List<QuestEntity> getQuestList() {
         return questRepository.findAll();

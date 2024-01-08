@@ -1,5 +1,6 @@
 package me.seula.hnw.service;
 
+import lombok.RequiredArgsConstructor;
 import me.seula.hnw.domain.CompanyEntity;
 import me.seula.hnw.dto.CompanyDTO;
 import me.seula.hnw.repository.CompanyRepository;
@@ -11,14 +12,10 @@ import java.util.List;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class CompanyService {
 
     private final CompanyRepository companyRepository;
-
-    @Autowired
-    public CompanyService(CompanyRepository companyRepository) {
-        this.companyRepository = companyRepository;
-    }
 
     public CompanyEntity getCompany(String companyName) {
         return companyRepository.findByCompanyName(companyName);
