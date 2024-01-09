@@ -2,7 +2,6 @@ package me.seula.greeny.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.antlr.v4.runtime.misc.NotNull;
 
 @Entity
 @Getter
