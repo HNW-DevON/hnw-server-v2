@@ -24,10 +24,7 @@ public class ProductService {
     }
 
     public List<ProductEntity> getCompanyProduct(int companyId) {
-        return productRepository.findAllByCompanyId(
-                companyRepository.findById(companyId)
-                        .orElse(null)
-        );
+        return productRepository.findAllByCompanyId(companyId);
     }
 
     public ProductEntity getProduct(int productId) {
