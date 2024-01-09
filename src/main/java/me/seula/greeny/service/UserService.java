@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -32,6 +31,8 @@ public class UserService {
                         .password(bCryptPasswordEncoder.encode(registerDTO.getPassword()))
                         .name(registerDTO.getName())
                         .birth(registerDTO.getBirth())
+                        .totalExp(0)
+                        .hasPoint(0)
                         .role("ROLE_USER")
                         .build()
         );

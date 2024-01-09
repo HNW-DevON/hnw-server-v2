@@ -11,27 +11,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/company")
 @RequiredArgsConstructor
 public class CompanyController {
 
     private final CompanyService companyService;
     private final ProductService productService;
 
-    @GetMapping("/company")
+    @GetMapping
     public List<CompanyEntity> getCompanyList() {
         return companyService.getCompanyList();
     }
 
-    @GetMapping("/company/{companyName}")
-    public CompanyEntity getCompany(@PathVariable("companyName") String companyName) {
-        return companyService.getCompany(companyName);
+    @GetMapping("/{companyName}")
+    public CompanyEntity getCompany(@PathVariable("companyName") int companyId) {
+        return companyService.getCompany(companyId);
     }
-    @GetMapping("/company/{companyName}/products")
-    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") String companyName) {
-        return productService.getCompanyProduct(companyName);
+    @GetMapping("/{companyName}/products")
+    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") int companyId) {
+        return productService.getCompanyProduct(companyId);
     }
 
-    @PostMapping("/company/create")
+    @PostMapping
     public void createCompany(CompanyDTO companyDTO) {
         companyService.createCompany(companyDTO);
     }

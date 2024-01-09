@@ -7,10 +7,19 @@ import lombok.Setter;
 @Setter
 public class ProductDTO {
 
+    /*
+        제품 이름
+    */
     private String productName;
 
+    /*
+        제품 설명
+    */
     private String productDesc;
 
-    private String companyName;
+    /*
+        만든 회사 ID
+    */
+    private int companyId;
 
 }

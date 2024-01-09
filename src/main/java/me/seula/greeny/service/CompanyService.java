@@ -1,5 +1,6 @@
 package me.seula.greeny.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.CompanyEntity;
 import me.seula.greeny.dto.CompanyDTO;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -16,8 +18,9 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public CompanyEntity getCompany(String companyName) {
-        return companyRepository.findByCompanyName(companyName).get();
+    public CompanyEntity getCompany(int companyId) {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company Not Found : " + companyId));
     }
 
     public List<CompanyEntity> getCompanyList() {
@@ -27,13 +30,14 @@ public class CompanyService {
     public void createCompany(CompanyDTO companyDTO) {
         String companyName = companyDTO.getCompanyName();
 
-        if (companyRepository.findByCompanyName(companyName).isPresent()) {
+        if (companyRepository.existsByCompanyName(companyName)) {
             return;
         }
 
         companyRepository.save(CompanyEntity.builder()
                 .companyName(companyName)
                 .companyAddress(companyDTO.getCompanyAddress())
+                .contribution(0)
                 .build()
         );
     }
