@@ -1,5 +1,6 @@
 package me.seula.greeny.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.EventEntity;
 import me.seula.greeny.dto.EventDTO;
@@ -21,7 +22,8 @@ public class EventService {
     }
 
     public EventEntity getEvent(int eventId) {
-        return eventRepository.findById(eventId).get();
+        return eventRepository.findById(eventId)
+                .orElseThrow(() -> new EntityNotFoundException("Entity Not Found : " + eventId));
     }
 
     public void createEvent(EventDTO eventDTO) {

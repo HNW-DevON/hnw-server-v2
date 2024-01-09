@@ -1,5 +1,6 @@
 package me.seula.greeny.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.QuestEntity;
 import me.seula.greeny.dto.QuestDTO;
@@ -21,7 +22,8 @@ public class QuestService {
     }
 
     public QuestEntity getQuest(int questId) {
-        return questRepository.findById(questId).get();
+        return questRepository.findById(questId)
+                .orElseThrow(() -> new EntityNotFoundException("Quest Not Found : " + questId));
     }
 
     public void createQuest(QuestDTO questDTO) {

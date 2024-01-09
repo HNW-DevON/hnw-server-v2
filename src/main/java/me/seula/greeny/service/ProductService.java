@@ -1,5 +1,6 @@
 package me.seula.greeny.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.ProductEntity;
 import me.seula.greeny.dto.ProductDTO;
@@ -25,7 +26,8 @@ public class ProductService {
     }
 
     public ProductEntity getProduct(String productName) {
-        return productRepository.findByProductName(productName).get();
+        return productRepository.findByProductName(productName)
+                .orElseThrow(() -> new EntityNotFoundException("Product Not Found : " + productName));
     }
 
     public void createProduct(ProductDTO productDTO) {
