@@ -8,5 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
-    List<ProductEntity> findAllByCompanyId(CompanyEntity companyId);
+    List<ProductEntity> findAllByCompanyId(int companyId);
 }
