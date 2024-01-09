@@ -3,7 +3,6 @@ package me.seula.greeny.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Entity
 @Getter
@@ -31,18 +30,6 @@ public class CompanyEntity {
     */
     @Column(nullable = false)
     private int contribution;
-
-    /*
-        진행중인 이벤트
-    */
-    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<EventEntity> companyEvent;
-
-    /*
-        회사 제품
-    */
-    @OneToMany(mappedBy = "company", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-    private List<EventEntity> companyProduct;
 
     @Builder
     public CompanyEntity(

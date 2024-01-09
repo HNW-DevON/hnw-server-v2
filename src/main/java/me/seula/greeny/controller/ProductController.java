@@ -1,33 +1,34 @@
 package me.seula.greeny.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import lombok.RequiredArgsConstructor;
-import me.seula.greeny.domain.ProductEntity;
-import me.seula.greeny.dto.ProductDTO;
-import me.seula.greeny.service.ProductService;
+import me.seula.greeny.service.PediaService;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
+    private final PediaService pediaService;
+    private final RestTemplate restTemplate;
 
-    @GetMapping
-    public List<ProductEntity> getAllProduct() {
-        return productService.getAllProduct();
+    @GetMapping("/{productId}")
+    public String getProduct(@PathVariable("productId") String productId) {
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> http = new HttpEntity<>(headers);
+        JsonNode result = restTemplate.exchange("https://m.retaildb.or.kr/service/product_info/search/" + productId, HttpMethod.GET, http, JsonNode.class).getBody();
+
+        if (result.get("code").asText().equals("null")) {
+            pediaService.savePedia(productId);
+            return result.toString();
+        }
+
+        return null;
     }
-
-    @GetMapping("/{productName}")
-    public ProductEntity getProduct(@PathVariable("productName") int productId) {
-        return productService.getProduct(productId);
-    }
-
-    @PostMapping
-    public void createProduct(ProductDTO productDTO) {
-        productService.createProduct(productDTO);
-    }
-
 }
+
