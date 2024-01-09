@@ -3,8 +3,6 @@ package me.seula.greeny.service;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.PediaEntity;
 import me.seula.greeny.repository.PediaRepository;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;

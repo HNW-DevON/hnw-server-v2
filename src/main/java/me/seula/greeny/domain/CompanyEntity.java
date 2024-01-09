@@ -3,7 +3,6 @@ package me.seula.greeny.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.List;
 
 @Entity
 @Getter
