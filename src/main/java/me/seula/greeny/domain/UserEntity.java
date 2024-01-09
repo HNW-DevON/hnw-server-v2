@@ -15,7 +15,7 @@ public class UserEntity {
     /*
         사용자명
     */
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String username;
 
     /*
