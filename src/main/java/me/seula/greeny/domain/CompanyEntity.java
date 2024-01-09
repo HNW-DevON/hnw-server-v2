@@ -24,9 +24,20 @@ public class CompanyEntity {
     @Column(nullable = false)
     private String companyAddress;
 
+    /*
+        사회적 공헌도
+    */
+    @Column(nullable = false)
+    private int contribution;
+
     @Builder
-    public CompanyEntity(String companyName, String companyAddress) {
+    public CompanyEntity(
+            String companyName,
+            String companyAddress,
+            int contribution)
+    {
         this.companyName = companyName;
         this.companyAddress = companyAddress;
+        this.contribution = contribution;
     }
 }

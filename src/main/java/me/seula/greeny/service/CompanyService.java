@@ -34,6 +34,7 @@ public class CompanyService {
         companyRepository.save(CompanyEntity.builder()
                 .companyName(companyName)
                 .companyAddress(companyDTO.getCompanyAddress())
+                .contribution(0)
                 .build()
         );
     }

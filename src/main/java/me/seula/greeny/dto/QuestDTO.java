@@ -20,6 +20,11 @@ public class QuestDTO {
     /*
         인원 제한
     */
-    private int limit;
+    private int questLimit;
+
+    /*
+        주는 포인트
+    */
+    private int questPoint;
 
 }

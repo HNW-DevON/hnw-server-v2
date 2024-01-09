@@ -39,11 +39,24 @@ public class QuestEntity {
     @Column(nullable = false)
     private int questLimit;
 
+    /*
+        깨면 주는 포인트
+    */
+    @Column(nullable = false)
+    private int questPoint;
+
     @Builder
-    public QuestEntity(String questName, String questDesc, int questCurrent, int questLimit) {
+    public QuestEntity(
+            String questName,
+            String questDesc,
+            int questCurrent,
+            int questLimit,
+            int questPoint)
+    {
         this.questName = questName;
         this.questDesc = questDesc;
         this.questCurrent = questCurrent;
         this.questLimit = questLimit;
+        this.questPoint = questPoint;
     }
 }

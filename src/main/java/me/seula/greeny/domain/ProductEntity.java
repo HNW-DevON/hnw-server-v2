@@ -31,7 +31,11 @@ public class ProductEntity {
     private String companyName;
 
     @Builder
-    public ProductEntity(String productName, String productDesc, String companyName) {
+    public ProductEntity(
+            String productName,
+            String productDesc,
+            String companyName)
+    {
         this.productName = productName;
         this.productDesc = productDesc;
         this.companyName = companyName;

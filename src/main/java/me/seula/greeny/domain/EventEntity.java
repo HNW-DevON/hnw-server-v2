@@ -34,7 +34,11 @@ public class EventEntity {
     private String companyName;
 
     @Builder
-    public EventEntity(String eventName, String eventDesc, String companyName) {
+    public EventEntity(
+            String eventName,
+            String eventDesc,
+            String companyName)
+    {
         this.eventName = eventName;
         this.eventDesc = eventDesc;
         this.companyName = companyName;
