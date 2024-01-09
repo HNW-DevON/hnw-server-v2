@@ -18,8 +18,8 @@ public class ProductDTO {
     private String productDesc;
 
     /*
-        만든 회사 이름
+        만든 회사 ID
     */
-    private String companyName;
+    private int companyId;
 
 }

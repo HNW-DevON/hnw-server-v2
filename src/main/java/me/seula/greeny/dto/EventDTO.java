@@ -18,8 +18,8 @@ public class EventDTO {
     private String eventDesc;
 
     /*
-        개최 회사 이름
+        개최 회사 ID
     */
-    private String companyName;
+    private int companyId;
 
 }

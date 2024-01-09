@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CompanyRepository extends JpaRepository<CompanyEntity, Integer> {
-    Optional<CompanyEntity> findByCompanyName(String companyName);
+    Boolean existsByCompanyName(String companyName);
 }

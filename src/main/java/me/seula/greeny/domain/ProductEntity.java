@@ -25,19 +25,20 @@ public class ProductEntity {
     private String productDesc;
 
     /*
-        만든 회사 이름
+        만든 회사
     */
-    @Column(nullable = false)
-    private String companyName;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private CompanyEntity company;
 
     @Builder
     public ProductEntity(
             String productName,
             String productDesc,
-            String companyName)
+            CompanyEntity company)
     {
         this.productName = productName;
         this.productDesc = productDesc;
-        this.companyName = companyName;
+        this.company = company;
     }
 }

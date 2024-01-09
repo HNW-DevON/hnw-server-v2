@@ -18,9 +18,9 @@ public class CompanyService {
 
     private final CompanyRepository companyRepository;
 
-    public CompanyEntity getCompany(String companyName) {
-        return companyRepository.findByCompanyName(companyName)
-                .orElseThrow(() -> new EntityNotFoundException("Company Not Found : " + companyName));
+    public CompanyEntity getCompany(int companyId) {
+        return companyRepository.findById(companyId)
+                .orElseThrow(() -> new EntityNotFoundException("Company Not Found : " + companyId));
     }
 
     public List<CompanyEntity> getCompanyList() {
@@ -30,7 +30,7 @@ public class CompanyService {
     public void createCompany(CompanyDTO companyDTO) {
         String companyName = companyDTO.getCompanyName();
 
-        if (companyRepository.findByCompanyName(companyName).isPresent()) {
+        if (companyRepository.existsByCompanyName(companyName)) {
             return;
         }
 

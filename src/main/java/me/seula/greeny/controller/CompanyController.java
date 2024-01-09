@@ -24,12 +24,12 @@ public class CompanyController {
     }
 
     @GetMapping("/{companyName}")
-    public CompanyEntity getCompany(@PathVariable("companyName") String companyName) {
-        return companyService.getCompany(companyName);
+    public CompanyEntity getCompany(@PathVariable("companyName") int companyId) {
+        return companyService.getCompany(companyId);
     }
     @GetMapping("/{companyName}/products")
-    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") String companyName) {
-        return productService.getCompanyProduct(companyName);
+    public List<ProductEntity> getCompanyProduct(@PathVariable("companyName") int companyId) {
+        return productService.getCompanyProduct(companyId);
     }
 
     @PostMapping

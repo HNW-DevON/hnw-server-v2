@@ -21,8 +21,8 @@ public class ProductController {
     }
 
     @GetMapping("/{productName}")
-    public ProductEntity getProduct(@PathVariable("productName") String productName) {
-        return productService.getProduct(productName);
+    public ProductEntity getProduct(@PathVariable("productName") int productId) {
+        return productService.getProduct(productId);
     }
 
     @PostMapping

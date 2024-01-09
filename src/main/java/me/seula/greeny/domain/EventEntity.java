@@ -28,19 +28,20 @@ public class EventEntity {
     private String eventDesc;
 
     /*
-        개최 회사 이름
+        개최 회사
     */
-    @Column(nullable = false)
-    private String companyName;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private CompanyEntity company;
 
     @Builder
     public EventEntity(
             String eventName,
             String eventDesc,
-            String companyName)
+            CompanyEntity company)
     {
         this.eventName = eventName;
         this.eventDesc = eventDesc;
-        this.companyName = companyName;
+        this.company = company;
     }
 }
