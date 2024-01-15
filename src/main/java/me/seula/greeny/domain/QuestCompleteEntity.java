@@ -10,14 +10,22 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class QuestCompleteEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /*
+        1:N 관계
+        QuestEntity 연결
+    */
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "quest_id")
     private QuestEntity questEntity;
 
+    /*
+        성공한 유저 아이디
+    */
     @Column(nullable = false)
     private int completeUserId;
 
