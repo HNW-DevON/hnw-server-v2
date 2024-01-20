@@ -29,7 +29,7 @@ public class QuestService {
             return questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
         }
 
-        return new ArrayList<QuestEntity>();
+        return new ArrayList<>();
     }
 
     public QuestEntity getQuest(int questId) {
