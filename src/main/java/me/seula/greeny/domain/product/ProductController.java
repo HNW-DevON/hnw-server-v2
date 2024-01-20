@@ -9,6 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class ProductController {
         HttpEntity<String> http = new HttpEntity<>(headers);
         JsonNode result = restTemplate.exchange("https://m.retaildb.or.kr/service/product_info/search/" + productId, HttpMethod.GET, http, JsonNode.class).getBody();
 
-        if (result.get("code").asText().equals("null")) {
+        if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
             pediaService.savePedia(productId);
             return result.toString();
         }

@@ -1,5 +1,6 @@
 package me.seula.greeny.domain.quest_complete;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.quest.QuestEntity;
 import me.seula.greeny.domain.quest.QuestRepository;
@@ -18,8 +19,11 @@ public class QuestCompleteService {
     private final UserRepository userRepository;
 
     public void completeQuest(int id, Authentication authentication){
-        QuestEntity questEntity = questRepository.findById(id).get();
-        int userId = userRepository.findByUsername(authentication.getName()).get().getId();
+        QuestEntity questEntity = questRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Quest Entity Not Found"));
+        int userId = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
+                .getId();
 
         QuestCompleteEntity questCompleteEntity = questCompleteRepository.save(QuestCompleteEntity.builder()
                 .completeUserId(userId)

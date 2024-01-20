@@ -20,7 +20,9 @@ public class QuestService {
 
     // type = 1 - 성공  | type = 2 - 진행중
     public List<QuestEntity> getQuestList(int type, Authentication authentication) {
-        int userId = userRepository.findByUsername(authentication.getName()).get().getId();
+        int userId = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
+                .getId();
 
         if (type == 1){
             return questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
