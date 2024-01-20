@@ -13,7 +13,7 @@ public class QuestCompleteController {
     private final QuestCompleteService questCompleteService;
 
     @PostMapping("/complete/{id}")
-    public ResponseEntity completeQuest(
+    public ResponseEntity<?> completeQuest(
             Authentication authentication,
             @PathVariable int id){
         questCompleteService.completeQuest(id, authentication);
