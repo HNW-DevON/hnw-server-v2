@@ -1,6 +1,7 @@
 package me.seula.greeny.domain.pedia;
 
 import lombok.RequiredArgsConstructor;
+import me.seula.greeny.domain.point.PointService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,16 +27,20 @@ public class PediaService {
 
         String username = auth.getName();
 
-        if (pediaRepository.findByProductIdAndUsername(productId, username).isPresent()) {
-            return;
-        }
-
         PediaEntity pediaEntity = PediaEntity.builder()
                 .productId(productId)
                 .username(username)
                 .build();
 
         pediaRepository.save(pediaEntity);
+    }
+
+    public Boolean isExist(String productId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        return pediaRepository.findByProductIdAndUsername(productId, username).isEmpty();
     }
 
 }

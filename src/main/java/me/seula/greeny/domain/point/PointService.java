@@ -23,11 +23,12 @@ public class PointService {
 
         String username = auth.getName();
 
-
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
 
         user.setHasPoint(user.getHasPoint() + point);
+
+        userRepository.save(user);
 
         PointEntity pointEntity = new PointEntity(point, user);
 
