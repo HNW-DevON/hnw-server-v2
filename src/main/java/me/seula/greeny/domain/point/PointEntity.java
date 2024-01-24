@@ -30,5 +30,6 @@ public class PointEntity {
     public PointEntity(int point, UserEntity user) {
         this.point = point;
         this.user = user;
+        this.addedAt = LocalDateTime.now();
     }
 }

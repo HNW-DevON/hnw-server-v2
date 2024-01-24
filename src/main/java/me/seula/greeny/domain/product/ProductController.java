@@ -28,7 +28,7 @@ public class ProductController {
         JsonNode result = restTemplate.exchange("https://m.retaildb.or.kr/service/product_info/search/" + productId, HttpMethod.GET, http, JsonNode.class).getBody();
 
         if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
-            if (!pediaService.isExist(productId)) {
+            if (pediaService.isExist(productId)) {
                 pediaService.savePedia(productId);
                 pointService.updatePoint(30);
             }
