@@ -1,6 +1,7 @@
 package me.seula.greeny.domain.product;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.pedia.PediaService;
 import me.seula.greeny.domain.point.PointService;
@@ -30,7 +31,10 @@ public class ProductController {
         if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
             if (pediaService.isExist(productId)) {
                 pediaService.savePedia(productId);
-                pointService.updatePoint(30);
+
+                ((ObjectNode)result).put("isGotPoint", false);
+            } else {
+                ((ObjectNode)result).put(("isGotPoint"), true);
             }
 
             return result.toString();
