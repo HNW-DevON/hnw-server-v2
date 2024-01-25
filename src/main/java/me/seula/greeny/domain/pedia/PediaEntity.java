@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -27,10 +31,17 @@ public class PediaEntity {
     @Column(nullable = false)
     private String username;
 
+    /*
+        도감에 추가된 시간
+    */
+    @CreatedDate
+    private LocalDateTime addedAt;
+
     @Builder
     public PediaEntity (String productId, String username) {
         this.productId = productId;
         this.username = username;
+        this.addedAt = LocalDateTime.now();
     }
 
 }
