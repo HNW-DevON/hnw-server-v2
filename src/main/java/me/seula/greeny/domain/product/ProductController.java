@@ -31,17 +31,17 @@ public class ProductController {
         if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
             if (pediaService.isExist(productId)) {
                 pediaService.savePedia(productId);
-
-                ((ObjectNode)result).put("isGotPoint", false);
-            } else {
-                ((ObjectNode)result).put(("isGotPoint"), true);
             }
+
+            /*
+                포인트를 받은 기록이 있는가?
+            */
+            ((ObjectNode) result).put("isGotPoint", pointService.isGotPoint(productId));
 
             return result.toString();
         }
 
         return null;
     }
-
 }
 

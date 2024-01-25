@@ -34,6 +34,11 @@ public class PointEntity {
     private UserEntity user;
 
     /*
+        포인트 받은 제품 ID
+    */
+    private String productId;
+
+    /*
         업데이트 된 날짜
 
         이거 수정 필요
@@ -42,9 +47,10 @@ public class PointEntity {
     private LocalDateTime addedAt;
 
     @Builder
-    public PointEntity(int point, UserEntity user) {
+    public PointEntity(int point, String productId, UserEntity user) {
         this.point = point;
         this.user = user;
+        this.productId = productId;
         this.addedAt = LocalDateTime.now();
     }
 }

@@ -13,8 +13,8 @@ public class PointController {
 
     private final PointService pointService;
 
-    @GetMapping("/get/{id}")
-    public void get_point(@PathVariable("id") int id) {
-        pointService.updatePoint(30);
+    @GetMapping("/get/{productId}")
+    public void get_point(@PathVariable("productId") String productId) {
+        pointService.updatePoint(30, productId);
     }
 }

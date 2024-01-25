@@ -18,7 +18,7 @@ public class PointService {
     private final UserRepository userRepository;
     private final PointRepository pointRepository;
 
-    public void updatePoint(int point) {
+    public void updatePoint(int point, String productId) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
@@ -30,9 +30,20 @@ public class PointService {
 
         userRepository.save(user);
 
-        PointEntity pointEntity = new PointEntity(point, user);
+        PointEntity pointEntity = new PointEntity(point, productId, user);
 
         pointRepository.save(pointEntity);
+    }
+
+    public Boolean isGotPoint(String productId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        return pointRepository.existsByProductIdAndUser(productId, user);
     }
 
 }
