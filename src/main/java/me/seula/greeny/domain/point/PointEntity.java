@@ -16,13 +16,26 @@ public class PointEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    /*
+        포인트량
+    */
     @Column(nullable = false)
     private int point;
 
+    /*
+        유저 외래키
+
+        근데 이거 외래키 써야됨 ?
+    */
     @ManyToOne
     @JoinColumn(nullable = false)
     private UserEntity user;
 
+    /*
+        업데이트 된 날짜
+
+        이거 수정 필요
+    */
     @CreatedDate
     private LocalDateTime addedAt;
 
