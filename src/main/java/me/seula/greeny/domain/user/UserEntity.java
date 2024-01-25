@@ -2,6 +2,9 @@ package me.seula.greeny.domain.user;
 
 import jakarta.persistence.*;
 import lombok.*;
+import me.seula.greeny.domain.point.PointEntity;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,8 +48,15 @@ public class UserEntity {
     /*
         가진 포인트
     */
+    @Setter
     @Column(nullable = false)
     private int hasPoint;
+
+    /*
+        포인트 기록
+    */
+    @OneToMany(mappedBy = "user")
+    private List<PointEntity> pointHistory;
 
     /*
         권한 정보 (임시)
