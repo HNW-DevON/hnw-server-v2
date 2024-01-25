@@ -7,7 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.seula.greeny.domain.quest_complete.QuestCompleteEntity;
+import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,12 @@ public class QuestEntity {
     @Column(nullable = false)
     private int questPoint;
 
+    /*
+        퀘스트 추가된 시간
+    */
+    @CreatedDate
+    private LocalDateTime createdAt;
+
     @OneToMany(mappedBy = "questEntity", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @JsonIgnore
     private List<QuestCompleteEntity> questCompleteEntityList = new ArrayList<>();
@@ -69,6 +77,7 @@ public class QuestEntity {
         this.questLimit = questLimit;
         this.questPoint = questPoint;
         this.questCompleteEntityList = questCompleteEntityList;
+        this.createdAt = LocalDateTime.now();
     }
 
     public void addQuestComplete(QuestCompleteEntity questCompleteEntity) {
