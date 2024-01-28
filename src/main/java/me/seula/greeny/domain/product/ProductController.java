@@ -2,6 +2,7 @@ package me.seula.greeny.domain.product;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.pedia.PediaService;
 import me.seula.greeny.domain.point.PointService;
@@ -22,6 +23,10 @@ public class ProductController {
     private final PointService pointService;
     private final RestTemplate restTemplate;
 
+    /*
+        제품 조회 (도감 등록)
+    */
+    @Operation(summary = "제품 인식 (조회)", description = "제품 정보를 반환합니다 (도감 등록)")
     @GetMapping("/{productId}")
     public String getProduct(@PathVariable("productId") String productId) {
         HttpHeaders headers = new HttpHeaders();
