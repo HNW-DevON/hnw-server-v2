@@ -1,11 +1,13 @@
 package me.seula.greeny.domain.event;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = "이벤트", description = "이벤트 관련 API 모음")
 @RestController
 @RequestMapping("/event")
 @RequiredArgsConstructor

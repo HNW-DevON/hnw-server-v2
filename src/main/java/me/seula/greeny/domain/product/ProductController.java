@@ -3,6 +3,7 @@ package me.seula.greeny.domain.product;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.pedia.PediaService;
 import me.seula.greeny.domain.point.PointService;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Objects;
 
+@Tag(name = "제품", description = "제품 관련 API 모음")
 @RestController
 @RequestMapping("/product")
 @RequiredArgsConstructor
