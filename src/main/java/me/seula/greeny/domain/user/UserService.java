@@ -164,4 +164,17 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public void editUser(EditDTO editDTO) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        user.setName(editDTO.getName());
+
+        userRepository.save(user);
+    }
 }
