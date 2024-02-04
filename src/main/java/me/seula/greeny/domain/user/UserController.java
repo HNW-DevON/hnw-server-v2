@@ -46,4 +46,9 @@ public class UserController {
     public Resource getImage() {
         return userService.getImage();
     }
+
+    @PostMapping("/edit")
+    public void editUser(EditDTO editDTO) {
+        userService.editUser(editDTO);
+    }
 }
