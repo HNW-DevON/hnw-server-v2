@@ -30,6 +30,7 @@ public class CompanyEntity {
     /*
         회사 카테고리
     */
+    @Setter
     private String companyCategory;
 
     @Builder
