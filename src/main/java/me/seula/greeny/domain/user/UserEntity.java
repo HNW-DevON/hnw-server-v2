@@ -30,6 +30,7 @@ public class UserEntity {
     /*
         이름
     */
+    @Setter
     @Column(nullable = false)
     private String name;
 
