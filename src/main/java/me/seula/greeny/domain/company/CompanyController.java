@@ -38,7 +38,7 @@ public class CompanyController {
     */
     @Operation(summary = "사회적 기업 등록", description = "회사를 사회적 기업으로 등록합니다")
     @PostMapping
-    public void createCompany(CompanyDTO companyDTO) {
+    public void createCompany(@RequestBody CompanyDTO companyDTO) {
         companyService.createCompany(companyDTO);
     }
 
