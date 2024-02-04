@@ -32,7 +32,7 @@ public class UserController {
 
     @Operation(summary = "유저 이미지 업로드", description = "유저의 이미지를 수정합니다")
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("file")MultipartFile file) {
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             userService.uploadImage(file);
             return "ok";
