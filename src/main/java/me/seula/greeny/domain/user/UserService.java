@@ -48,7 +48,7 @@ public class UserService {
     }
 
     public void uploadImage(MultipartFile file) throws IOException {
-        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/static";
+        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
 
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
@@ -63,7 +63,7 @@ public class UserService {
     }
 
     public Resource getImage(String imageName) {
-        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/static";
+        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
 
         try {
             Path imagePath = Paths.get(uploadPath).resolve(imageName).normalize();
