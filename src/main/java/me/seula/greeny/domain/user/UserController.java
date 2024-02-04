@@ -2,8 +2,10 @@ package me.seula.greeny.domain.user;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import me.seula.greeny.domain.user.dto.EditDTO;
+import me.seula.greeny.domain.user.dto.ExpDTO;
+import me.seula.greeny.domain.user.dto.RegisterDTO;
 import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +22,7 @@ public class UserController {
 
     @Operation(summary = "회원가입", description = "유저를 회원가입합니다")
     @PostMapping("/register")
-    public String register(RegisterDTO registerDTO) {
+    public String register(@RequestBody RegisterDTO registerDTO) {
         userService.register(registerDTO);
         return "ok";
     }
@@ -31,8 +33,9 @@ public class UserController {
         return userService.getUserTier();
     }
 
+    @Operation(summary = "유저 이미지 업로드", description = "유저의 이미지를 수정합니다")
     @PostMapping("/upload")
-    public String uploadImage(@RequestParam("file")MultipartFile file) {
+    public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             userService.uploadImage(file);
             return "ok";
@@ -42,13 +45,15 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "유저 이미지 조회", description = "유저의 이미지를 가져옵니다")
     @GetMapping("/image")
     public Resource getImage() {
         return userService.getImage();
     }
 
+    @Operation(summary = "유저 프로필 수정", description = "유저의 프로필을 수정합니다")
     @PostMapping("/edit")
-    public void editUser(EditDTO editDTO) {
+    public void editUser(@RequestBody EditDTO editDTO) {
         userService.editUser(editDTO);
     }
 }

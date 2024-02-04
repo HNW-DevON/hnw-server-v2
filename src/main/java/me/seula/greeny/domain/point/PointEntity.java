@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import me.seula.greeny.domain.user.UserEntity;
 import org.springframework.data.annotation.CreatedDate;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -40,17 +41,15 @@ public class PointEntity {
 
     /*
         업데이트 된 날짜
-
-        이거 수정 필요
     */
     @CreatedDate
-    private LocalDateTime addedAt;
+    private LocalDate addedAt;
 
     @Builder
     public PointEntity(int point, String productId, UserEntity user) {
         this.point = point;
         this.user = user;
         this.productId = productId;
-        this.addedAt = LocalDateTime.now();
+        this.addedAt = LocalDateTime.now().toLocalDate();
     }
 }

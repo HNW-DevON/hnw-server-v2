@@ -3,6 +3,8 @@ package me.seula.greeny.domain.company;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -20,25 +22,27 @@ public class CompanyEntity {
     private String companyName;
 
     /*
-        회사 주소
+        회사 설명
     */
     @Column(nullable = false)
-    private String companyAddress;
+    private String companyDesc;
 
     /*
-        사회적 공헌도
+        회사 카테고리
     */
-    @Column(nullable = false)
-    private int contribution;
+    @Setter
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> companyCategory;
 
     @Builder
     public CompanyEntity(
             String companyName,
-            String companyAddress,
-            int contribution)
+            String companyDesc,
+            List<String> companyCategory
+    )
     {
         this.companyName = companyName;
-        this.companyAddress = companyAddress;
-        this.contribution = contribution;
+        this.companyDesc = companyDesc;
+        this.companyCategory = companyCategory;
     }
 }

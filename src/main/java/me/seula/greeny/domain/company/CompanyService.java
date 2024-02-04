@@ -32,9 +32,13 @@ public class CompanyService {
 
         companyRepository.save(CompanyEntity.builder()
                 .companyName(companyName)
-                .companyAddress(companyDTO.getCompanyAddress())
-                .contribution(0)
+                .companyDesc(companyDTO.getCompanyDesc())
+                .companyCategory(companyDTO.getCompanyCategory())
                 .build()
         );
+    }
+
+    public List<CompanyEntity> getCompanyListByCategory(String companyCategory) {
+        return companyRepository.findByCompanyCategoryContaining(companyCategory);
     }
 }

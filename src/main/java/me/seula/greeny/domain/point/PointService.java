@@ -2,7 +2,6 @@ package me.seula.greeny.domain.point;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import me.seula.greeny.domain.pedia.PediaEntity;
 import me.seula.greeny.domain.user.UserEntity;
 import me.seula.greeny.domain.user.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -45,5 +44,4 @@ public class PointService {
 
         return pointRepository.existsByProductIdAndUser(productId, user);
     }
-
 }

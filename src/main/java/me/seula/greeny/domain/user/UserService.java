@@ -1,5 +1,8 @@
 package me.seula.greeny.domain.user;
 
+import me.seula.greeny.domain.user.dto.EditDTO;
+import me.seula.greeny.domain.user.dto.ExpDTO;
+import me.seula.greeny.domain.user.dto.RegisterDTO;
 import org.springframework.core.io.Resource;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -115,7 +118,12 @@ public class UserService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
 
-        return new ExpDTO(user.getTier(), user.getTotalExp() % 100);
+        ExpDTO expDTO = new ExpDTO();
+
+        expDTO.setTier(user.getTier());
+        expDTO.setLeft(user.getTotalExp() % 100);
+
+        return expDTO;
     }
 
     public void updateUserTier() {

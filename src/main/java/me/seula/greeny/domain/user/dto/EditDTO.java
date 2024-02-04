@@ -1,4 +1,4 @@
-package me.seula.greeny.domain.user;
+package me.seula.greeny.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
