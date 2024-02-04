@@ -30,6 +30,7 @@ public class UserEntity {
     /*
         이름
     */
+    @Setter
     @Column(nullable = false)
     private String name;
 
@@ -38,6 +39,13 @@ public class UserEntity {
     */
     @Column(nullable = false)
     private String birth;
+
+    /*
+        프로필 사진 경로
+    */
+    @Setter
+    @Column(nullable = false)
+    private String imagePath;
 
     /*
         총 경험치
