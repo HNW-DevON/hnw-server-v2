@@ -1,6 +1,5 @@
 package me.seula.greeny.domain.user;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
