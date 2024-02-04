@@ -48,6 +48,7 @@ public class UserEntity {
     /*
         사용자 티어
     */
+    @Setter
     @Column(nullable = false)
     private String tier;
 
