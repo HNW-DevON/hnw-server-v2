@@ -42,6 +42,7 @@ public class UserEntity {
     /*
         프로필 사진 경로
     */
+    @Setter
     @Column(nullable = false)
     private String imagePath;
 
