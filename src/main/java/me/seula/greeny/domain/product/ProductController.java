@@ -41,6 +41,7 @@ public class ProductController {
             if (pediaService.isExist(productId)) {
                 pediaService.savePedia(productId);
                 userService.addExp();
+                userService.updateUserTier();
             }
 
             /*
