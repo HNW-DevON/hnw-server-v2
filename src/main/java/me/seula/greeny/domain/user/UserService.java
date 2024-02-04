@@ -1,7 +1,9 @@
 package me.seula.greeny.domain.user;
 
+import org.springframework.core.io.Resource;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -57,6 +60,23 @@ public class UserService {
 
         File dest = new File(filePath);
         file.transferTo(dest);
+    }
+
+    public Resource getImage(String imageName) {
+        String uploadPath = "path/to/upload/directory/";
+
+        try {
+            Path imagePath = Paths.get(uploadPath).resolve(imageName).normalize();
+            Resource resource = new UrlResource(imagePath.toUri());
+
+            if (resource.exists() && resource.isReadable()) {
+                return resource;
+            } else {
+                throw new RuntimeException("Image not found");
+            }
+        } catch (MalformedURLException e) {
+            throw new RuntimeException("Image not found", e);
+        }
     }
 
     public void addExp() {
