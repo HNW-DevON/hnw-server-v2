@@ -51,9 +51,9 @@ public class SecurityConfig {
         http.httpBasic(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/login", "/register").permitAll()
+                .requestMatchers("/login", "/user").permitAll()
                 .requestMatchers("/v3/**", "/swagger-ui/**").permitAll()
-                .requestMatchers("/company", "/product", "/quest", "/pedia", "/point", "/find", "/event", "/user").hasRole("USER")
+                .requestMatchers("/company", "/product", "/quest", "/pedia", "/point", "/find", "/event").hasRole("USER")
                 .anyRequest().authenticated()
         );
 
