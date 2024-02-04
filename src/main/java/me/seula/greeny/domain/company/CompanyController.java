@@ -42,4 +42,9 @@ public class CompanyController {
         companyService.createCompany(companyDTO);
     }
 
+    @GetMapping("/category/{categoryName}")
+    public List<CompanyEntity> getCompanyListByCategory(@PathVariable("categoryName") String categoryName) {
+        return companyService.getCompanyListByCategory(categoryName);
+    }
+
 }
