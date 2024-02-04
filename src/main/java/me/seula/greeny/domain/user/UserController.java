@@ -15,4 +15,5 @@ public class UserController {
         userService.register(registerDTO);
         return "ok";
     }
+
 }
