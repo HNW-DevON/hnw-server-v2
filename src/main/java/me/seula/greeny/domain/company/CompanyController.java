@@ -42,6 +42,7 @@ public class CompanyController {
         companyService.createCompany(companyDTO);
     }
 
+    @Operation(summary = "카테고리 기업 조회", description = "회사를 카테고리로 조회합니다")
     @GetMapping("/category/{categoryName}")
     public List<CompanyEntity> getCompanyListByCategory(@PathVariable("categoryName") String categoryName) {
         return companyService.getCompanyListByCategory(categoryName);
