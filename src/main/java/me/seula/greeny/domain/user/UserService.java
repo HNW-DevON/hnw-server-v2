@@ -7,6 +7,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 @Service
@@ -36,6 +42,21 @@ public class UserService {
                         .role("ROLE_USER")
                         .build()
         );
+    }
+
+    public void uploadImage(MultipartFile file) throws IOException {
+        String uploadPath = "/profileImages/";
+
+        File uploadDir = new File(uploadPath);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        String filePath = uploadPath + fileName;
+
+        File dest = new File(filePath);
+        file.transferTo(dest);
     }
 
     public void addExp() {
