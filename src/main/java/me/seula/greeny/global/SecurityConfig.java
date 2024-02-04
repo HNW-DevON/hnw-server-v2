@@ -52,7 +52,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests((auth) -> auth
                 .requestMatchers("/login", "/register").permitAll()
-                .requestMatchers("/v3/**", "/swagger-ui/**  ").permitAll()
+                .requestMatchers("/v3/**", "/swagger-ui/**").permitAll()
                 .requestMatchers("/company", "/product", "/quest", "/pedia", "/point", "/find", "/event", "/user").hasRole("USER")
                 .anyRequest().authenticated()
         );
