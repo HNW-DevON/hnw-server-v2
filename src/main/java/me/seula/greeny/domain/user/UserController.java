@@ -19,7 +19,7 @@ public class UserController {
 
     @Operation(summary = "회원가입", description = "유저를 회원가입합니다")
     @PostMapping("/register")
-    public String register(RegisterDTO registerDTO) {
+    public String register(@RequestBody RegisterDTO registerDTO) {
         userService.register(registerDTO);
         return "ok";
     }
@@ -30,6 +30,7 @@ public class UserController {
         return userService.getUserTier();
     }
 
+    @Operation(summary = "유저 이미지 업로드", description = "유저의 이미지를 수정합니다")
     @PostMapping("/upload")
     public String uploadImage(@RequestParam("file")MultipartFile file) {
         try {
@@ -41,13 +42,15 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "유저 이미지 조회", description = "유저의 이미지를 가져옵니다")
     @GetMapping("/image")
     public Resource getImage() {
         return userService.getImage();
     }
 
+    @Operation(summary = "유저 프로필 수정", description = "유저의 프로필을 수정합니다")
     @PostMapping("/edit")
-    public void editUser(EditDTO editDTO) {
+    public void editUser(@RequestBody EditDTO editDTO) {
         userService.editUser(editDTO);
     }
 }

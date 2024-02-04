@@ -38,7 +38,7 @@ public class EventController {
     */
     @Operation(summary = "이벤트 생성", description = "이벤트를 생성합니다")
     @PostMapping
-    public void createEvent(EventDTO eventDTO) {
+    public void createEvent(@RequestBody EventDTO eventDTO) {
         eventService.createEvent(eventDTO);
     }
 }
