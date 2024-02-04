@@ -44,7 +44,6 @@ public class UserEntity {
         프로필 사진 경로
     */
     @Setter
-    @Column(nullable = false)
     private String imagePath;
 
     /*
@@ -58,7 +57,6 @@ public class UserEntity {
         사용자 티어
     */
     @Setter
-    @Column(nullable = false)
     private String tier;
 
     /*
