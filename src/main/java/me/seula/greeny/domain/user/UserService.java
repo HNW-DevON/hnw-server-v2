@@ -39,7 +39,7 @@ public class UserService {
         );
     }
 
-    public String getUserTier() {
+    public ExpDTO getUserTier() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String username = auth.getName();
@@ -47,7 +47,7 @@ public class UserService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
 
-        return user.getTier();
+        return new ExpDTO(user.getTier(), user.getTotalExp() % 100);
     }
 
     public void updateUserTier() {
