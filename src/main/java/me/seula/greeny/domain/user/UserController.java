@@ -2,11 +2,13 @@ package me.seula.greeny.domain.user;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Tag(name = "유저", description = "유저 관련 API 모음")
 @RestController
@@ -27,5 +29,21 @@ public class UserController {
     @GetMapping("/tier")
     public ExpDTO getUserTier() {
         return userService.getUserTier();
+    }
+
+    @PostMapping("/upload")
+    public String uploadImage(@RequestParam("file")MultipartFile file) {
+        try {
+            userService.uploadImage(file);
+            return "ok";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "될 거 같음? ㅋㅋ";
+        }
+    }
+
+    @GetMapping("/image")
+    public Resource getImage() {
+        return userService.getImage();
     }
 }

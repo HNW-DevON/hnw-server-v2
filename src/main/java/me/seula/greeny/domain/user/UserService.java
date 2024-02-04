@@ -48,6 +48,13 @@ public class UserService {
     }
 
     public void uploadImage(MultipartFile file) throws IOException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
         String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
 
         File uploadDir = new File(uploadPath);
@@ -60,13 +67,23 @@ public class UserService {
 
         File dest = new File(filePath);
         file.transferTo(dest);
+
+        user.setImagePath(filePath);
+        userRepository.save(user);
     }
 
-    public Resource getImage(String imageName) {
+    public Resource getImage() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
         String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
 
         try {
-            Path imagePath = Paths.get(uploadPath).resolve(imageName).normalize();
+            Path imagePath = Paths.get(uploadPath).resolve(user.getImagePath()).normalize();
             Resource resource = new UrlResource(imagePath.toUri());
 
             if (resource.exists() && resource.isReadable()) {
