@@ -1,8 +1,10 @@
 package me.seula.greeny.domain.user;
 
+import lombok.Getter;
 import me.seula.greeny.domain.user.dto.EditDTO;
 import me.seula.greeny.domain.user.dto.ExpDTO;
 import me.seula.greeny.domain.user.dto.RegisterDTO;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -28,6 +30,9 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Value("${file.path}")
+    private String uploadPath;
 
     public void register(RegisterDTO registerDTO) {
         String username = registerDTO.getUsername();
@@ -58,8 +63,6 @@ public class UserService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
 
-        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
-
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdirs();
@@ -83,7 +86,6 @@ public class UserService {
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
 
-        String uploadPath = "/Users/soyun/Documents/Projects/hnw/src/main/resources/profileImages/";
 
         try {
             Path imagePath = Paths.get(uploadPath).resolve(user.getImagePath()).normalize();
