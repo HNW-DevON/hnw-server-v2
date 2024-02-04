@@ -42,8 +42,16 @@ public class UserEntity {
     /*
         총 경험치
     */
+    @Setter
     @Column(nullable = false)
     private int totalExp;
+
+    /*
+        사용자 티어
+    */
+    @Setter
+    @Column(nullable = false)
+    private String tier;
 
     /*
         가진 포인트

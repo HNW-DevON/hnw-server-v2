@@ -1,6 +1,9 @@
 package me.seula.greeny.domain.user;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,5 +36,74 @@ public class UserService {
                         .role("ROLE_USER")
                         .build()
         );
+    }
+
+    public void addExp() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        user.setTotalExp(user.getTotalExp() + 25);
+    }
+
+    public ExpDTO getUserTier() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        return new ExpDTO(user.getTier(), user.getTotalExp() % 100);
+    }
+
+    public void updateUserTier() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        int tier = user.getTotalExp() / 100;
+
+        switch(tier) {
+            case 1:
+                user.setTier("씨앗 3");
+                break;
+            case 2:
+                user.setTier("씨앗 2");
+                break;
+            case 3:
+                user.setTier("씨앗 1");
+
+            case 4:
+                user.setTier("새싹 3");
+                break;
+            case 5:
+                user.setTier("새싹 2");
+                break;
+            case 6:
+                user.setTier("새싹 1");
+                break;
+
+            case 7:
+                user.setTier("나무 3");
+                break;
+            case 8:
+                user.setTier("나무 2");
+                break;
+            case 9:
+                user.setTier("나무 1");
+                break;
+
+            default:
+                throw new IllegalStateException("티어를 구할 수 없음");
+        }
+
+        userRepository.save(user);
     }
 }

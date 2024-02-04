@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.pedia.PediaService;
 import me.seula.greeny.domain.point.PointService;
+import me.seula.greeny.domain.user.UserService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,6 +24,7 @@ public class ProductController {
 
     private final PediaService pediaService;
     private final PointService pointService;
+    private final UserService userService;
     private final RestTemplate restTemplate;
 
     /*
@@ -38,6 +40,8 @@ public class ProductController {
         if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
             if (pediaService.isExist(productId)) {
                 pediaService.savePedia(productId);
+                userService.addExp();
+                userService.updateUserTier();
             }
 
             /*
