@@ -40,6 +40,12 @@ public class UserEntity {
     private String birth;
 
     /*
+        프로필 사진 경로
+    */
+    @Column(nullable = false)
+    private String imagePath;
+
+    /*
         총 경험치
     */
     @Setter
