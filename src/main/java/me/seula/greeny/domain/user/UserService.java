@@ -39,6 +39,17 @@ public class UserService {
         );
     }
 
+    public void addExp() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+
+        user.setTotalExp(user.getTotalExp() + 25);
+    }
+
     public ExpDTO getUserTier() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
