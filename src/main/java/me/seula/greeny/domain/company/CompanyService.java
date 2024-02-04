@@ -37,4 +37,8 @@ public class CompanyService {
                 .build()
         );
     }
+
+    public List<CompanyEntity> getCompanyListByCategory(String companyCategory) {
+        return companyRepository.findByCompanyCategoryContaining(companyCategory);
+    }
 }
