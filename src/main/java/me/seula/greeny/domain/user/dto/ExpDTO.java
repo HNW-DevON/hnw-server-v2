@@ -1,10 +1,11 @@
-package me.seula.greeny.domain.user;
+package me.seula.greeny.domain.user.dto;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Builder
+@Setter
 public class ExpDTO {
 
     private String tier;
