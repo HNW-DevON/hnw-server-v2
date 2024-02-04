@@ -31,7 +31,8 @@ public class CompanyEntity {
         회사 카테고리
     */
     @Setter
-    private String companyCategory;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> companyCategory;
 
     @Builder
     public CompanyEntity(
@@ -42,6 +43,6 @@ public class CompanyEntity {
     {
         this.companyName = companyName;
         this.companyDesc = companyDesc;
-        this.companyCategory = String.join("|", companyCategory);
+        this.companyCategory = companyCategory;
     }
 }
