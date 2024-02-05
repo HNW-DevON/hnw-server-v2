@@ -1,12 +1,10 @@
 package me.seula.greeny.domain.find;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +15,9 @@ import java.util.List;
 public class FindController {
     private final FindService findService;
 
-    @Operation(summary = "추천 제품 조회", description = "추천 제품 리스트 가져오기")
+    @Operation(summary = "추천 제품 조회", description = "추천 제품 리스트 가져옵니다.")
     @GetMapping
-    public List<Long> getRecommendations(@RequestParam String username) {
+    public List<Long> getRecommendations(@PathVariable("username") String username) {
         return findService.findDistinctProductIdsByUsernameNot(username);
     }
 }
