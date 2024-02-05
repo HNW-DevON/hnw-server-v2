@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @Operation(summary = "유저 프로필 수정", description = "유저의 프로필을 수정합니다")
-    @PostMapping("/edit")
+    @PatchMapping("/edit")
     public void editUser(@RequestBody EditDTO editDTO) {
         userService.editUser(editDTO);
     }
