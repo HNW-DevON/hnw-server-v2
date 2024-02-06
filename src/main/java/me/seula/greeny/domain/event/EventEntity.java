@@ -1,5 +1,6 @@
 package me.seula.greeny.domain.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -32,6 +33,7 @@ public class EventEntity {
         개최 회사
     */
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(nullable = false)
     private CompanyEntity company;
 
