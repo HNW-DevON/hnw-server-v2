@@ -21,7 +21,9 @@ public class PointController {
     */
     @Operation(summary = "인식 포인트 적립", description = "제품 인식 포인트를 적립합니다 (30 포인트)")
     @GetMapping("/get/{productId}")
-    public void get_point(@PathVariable("productId") String productId) {
+    public String get_point(@PathVariable("productId") String productId) {
         pointService.updatePoint(30, productId);
+
+        return "{}";
     }
 }
