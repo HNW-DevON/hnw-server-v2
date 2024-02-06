@@ -1,5 +1,6 @@
 package me.seula.greeny.jwt;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -34,6 +35,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        response.setContentType("application/json");
+        response.setCharacterEncoding("utf-8");
+
         CustomUserDetails customUserDetails = (CustomUserDetails) authentication.getPrincipal();
 
         String username = customUserDetails.getUsername();
@@ -44,9 +50,9 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         String role = auth.getAuthority();
 
-        String token = jwtUtil.createToken(username, role, 1636027948L);
+        TokenDTO token = jwtUtil.createToken(username, role, 1636027948L);
 
-        response.getWriter().write("Bearer " + token);
+        response.getWriter().write(objectMapper.writeValueAsString(token));
         response.getWriter().flush();
     }
 
