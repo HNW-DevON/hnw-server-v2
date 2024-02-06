@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Component
@@ -30,13 +31,19 @@ public class JwtUtil {
         return Jwts.parser().verifyWith(secretKey).build().parseSignedClaims(token).getPayload().getExpiration().before(new Date());
     }
 
-    public String createToken(String username, String role, Long expireMs) {
-        return Jwts.builder()
+    public TokenDTO createToken(String username, String role, Long expireMs) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+        Date expireAt = new Date(System.currentTimeMillis() + expireMs);
+
+        String token =  Jwts.builder()
                 .claim("username", username)
                 .claim("role", role)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + expireMs))
+                .expiration(expireAt)
                 .signWith(secretKey)
                 .compact();
+
+        return new TokenDTO(sdf.format(expireAt), token);
     }
 }
