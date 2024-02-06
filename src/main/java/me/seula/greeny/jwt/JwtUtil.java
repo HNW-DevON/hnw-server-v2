@@ -44,6 +44,6 @@ public class JwtUtil {
                 .signWith(secretKey)
                 .compact();
 
-        return new TokenDTO(sdf.format(expireAt), token);
+        return new TokenDTO(sdf.format(expireAt), "Bearer " + token);
     }
 }
