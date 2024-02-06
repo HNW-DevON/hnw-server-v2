@@ -35,16 +35,19 @@ public class UserController {
         return userService.getUserTier();
     }
 
+    /*
+        원본 -> 파이어베이스 URL
+    */
     @Operation(summary = "유저 이미지 업로드", description = "유저의 이미지를 수정합니다")
     @PostMapping("/upload")
     public String uploadImage(@RequestParam("file") MultipartFile file) {
         try {
             userService.uploadImage(file);
-            return "ok";
         } catch (IOException e) {
             e.printStackTrace();
-            return "될 거 같음? ㅋㅋ";
         }
+
+        return "{}";
     }
 
     @Operation(summary = "유저 이미지 조회", description = "유저의 이미지를 가져옵니다")
@@ -55,7 +58,9 @@ public class UserController {
 
     @Operation(summary = "유저 프로필 수정", description = "유저의 프로필을 수정합니다")
     @PatchMapping("/edit")
-    public void editUser(@RequestBody EditDTO editDTO) {
+    public String editUser(@RequestBody EditDTO editDTO) {
         userService.editUser(editDTO);
+
+        return "";
     }
 }
