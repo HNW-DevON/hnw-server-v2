@@ -2,6 +2,7 @@ package me.seula.greeny.domain.company;
 
 import jakarta.persistence.*;
 import lombok.*;
+import me.seula.greeny.domain.event.EventEntity;
 
 import java.util.List;
 
@@ -33,6 +34,12 @@ public class CompanyEntity {
     @Setter
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> companyCategory;
+
+    /*
+        회사 주관 이벤트
+    */
+    @OneToMany(mappedBy = "company", fetch = FetchType.EAGER)
+    private List<EventEntity> event;
 
     @Builder
     public CompanyEntity(
