@@ -7,6 +7,7 @@ import me.seula.greeny.domain.user.dto.EditDTO;
 import me.seula.greeny.domain.user.dto.ExpDTO;
 import me.seula.greeny.domain.user.dto.RegisterDTO;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +25,8 @@ public class UserController {
     @PostMapping("/register")
     public String register(@RequestBody RegisterDTO registerDTO) {
         userService.register(registerDTO);
-        return "ok";
+
+        return "{}";
     }
 
     @Operation(summary = "유저 티어 조회", description = "유저 티어와 잔여 EXP를 조회합니다")
