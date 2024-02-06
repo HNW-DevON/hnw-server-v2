@@ -41,7 +41,9 @@ public class QuestController {
     */
     @Operation(summary = "퀘스트 생성", description = "퀘스트를 생성합니다")
     @PostMapping
-    public void createQuest(@RequestBody QuestDTO questDTO) {
+    public String createQuest(@RequestBody QuestDTO questDTO) {
         questService.createQuest(questDTO);
+
+        return "{}";
     }
 }
