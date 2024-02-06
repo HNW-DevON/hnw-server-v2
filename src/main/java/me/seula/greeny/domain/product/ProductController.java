@@ -52,7 +52,7 @@ public class ProductController {
             return result.toString();
         }
 
-        return null;
+        return "{}";
     }
 }
 
