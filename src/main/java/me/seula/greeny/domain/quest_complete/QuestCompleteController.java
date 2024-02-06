@@ -24,7 +24,7 @@ public class QuestCompleteController {
             Authentication authentication,
             @PathVariable int id){
         questCompleteService.completeQuest(id, authentication);
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok("{}");
     }
 
 
