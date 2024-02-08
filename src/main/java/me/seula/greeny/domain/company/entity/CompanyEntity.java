@@ -31,7 +31,6 @@ public class CompanyEntity {
     /*
         회사 카테고리
     */
-    @Setter
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> companyCategory;
 
