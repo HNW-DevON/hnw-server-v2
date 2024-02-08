@@ -3,6 +3,7 @@ package me.seula.greeny.domain.user.service;
 import me.seula.greeny.domain.user.dto.EditDTO;
 import me.seula.greeny.domain.user.dto.ExpDTO;
 import me.seula.greeny.domain.user.dto.RegisterDTO;
+import me.seula.greeny.domain.user.dto.UserDTO;
 import me.seula.greeny.domain.user.entity.UserEntity;
 import me.seula.greeny.domain.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
@@ -139,7 +140,7 @@ public class UserService {
 
         int tier = user.getTotalExp() / 100;
 
-        switch(tier) {
+        switch (tier) {
             case 0:
                 user.setTier("씨앗 3");
                 break;
@@ -187,5 +188,22 @@ public class UserService {
         user.setName(editDTO.getName());
 
         userRepository.save(user);
+    }
+
+    public UserDTO getUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"));
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setName(user.getName());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setTier(user.getTier());
+        userDTO.setBirth(user.getBirth());
+        userDTO.setPointHistory(user.getPointHistory());
+        return userDTO;
     }
 }

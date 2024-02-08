@@ -8,6 +8,7 @@ import me.seula.greeny.domain.user.dto.EditDTO;
 import me.seula.greeny.domain.user.dto.ExpDTO;
 import me.seula.greeny.domain.user.dto.RegisterDTO;
 import org.springframework.core.io.Resource;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,5 +63,11 @@ public class UserController {
         userService.editUser(editDTO);
 
         return "";
+    }
+
+    @Operation(summary = "유저 정보 조회")
+    @GetMapping("/info")
+    public ResponseEntity<?> getInfo() {
+        return ResponseEntity.ok(userService.getUser());
     }
 }
