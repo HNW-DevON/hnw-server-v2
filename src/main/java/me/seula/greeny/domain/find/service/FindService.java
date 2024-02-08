@@ -28,11 +28,7 @@ public class FindService {
     }
 
     public List<JsonNode> findDistinctProductIdsByUsernameNot() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        String username = auth.getName();
-
-        List<Long> productIdList = findRepository.findDistinctProductIdsByUsernameNot(username);
+        List<Long> productIdList = findRepository.findDistinctProductId();
         List<JsonNode> productList = new ArrayList<>();
 
         HttpHeaders headers = new HttpHeaders();
