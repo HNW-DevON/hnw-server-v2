@@ -140,32 +140,32 @@ public class UserService {
         int tier = user.getTotalExp() / 100;
 
         switch(tier) {
-            case 1:
+            case 0:
                 user.setTier("씨앗 3");
                 break;
-            case 2:
+            case 1:
                 user.setTier("씨앗 2");
                 break;
-            case 3:
+            case 2:
                 user.setTier("씨앗 1");
 
-            case 4:
+            case 3:
                 user.setTier("새싹 3");
                 break;
-            case 5:
+            case 4:
                 user.setTier("새싹 2");
                 break;
-            case 6:
+            case 5:
                 user.setTier("새싹 1");
                 break;
 
-            case 7:
+            case 6:
                 user.setTier("나무 3");
                 break;
-            case 8:
+            case 7:
                 user.setTier("나무 2");
                 break;
-            case 9:
+            case 8:
                 user.setTier("나무 1");
                 break;
 

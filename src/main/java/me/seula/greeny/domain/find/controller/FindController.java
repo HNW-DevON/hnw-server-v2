@@ -1,5 +1,6 @@
 package me.seula.greeny.domain.find.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class FindController {
 
     @Operation(summary = "추천 제품 조회", description = "추천 제품 리스트 가져오기")
     @GetMapping
-    public List<Long> getRecommendations(@RequestParam String username) {
-        return findService.findDistinctProductIdsByUsernameNot(username);
+    public List<JsonNode> getRecommendations() {
+        return findService.findDistinctProductIdsByUsernameNot();
     }
 }
