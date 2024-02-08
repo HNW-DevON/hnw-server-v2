@@ -204,6 +204,9 @@ public class UserService {
         userDTO.setUsername(user.getUsername());
         userDTO.setTier(user.getTier());
         userDTO.setBirth(user.getBirth());
+        userDTO.setHasPoint(user.getHasPoint());
+        userDTO.setTotalExp(user.getTotalExp());
+        userDTO.setImagePath(user.getImagePath());
         userDTO.setPointHistory(user.getPointHistory().stream().map(PointEntity::toDomain).toList());
         return userDTO;
     }

@@ -21,6 +21,10 @@ public class UserDTO {
 
     private List<PointDTO> pointHistory;
 
+    private String imagePath;
 
+    private int totalExp;
+
+    private int hasPoint;
 
 }
