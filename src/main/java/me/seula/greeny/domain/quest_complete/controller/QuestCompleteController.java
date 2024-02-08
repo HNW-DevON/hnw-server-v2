@@ -20,7 +20,7 @@ public class QuestCompleteController {
         퀘스트 완료
     */
     @Operation(summary = "퀘스트 완료", description = "퀘스트를 완료 표시합니다")
-    @PostMapping("/complete/{id}")
+    @GetMapping("/complete/{id}")
     public ResponseEntity<?> completeQuest(@PathVariable int id){
         questCompleteService.completeQuest(id);
         return ResponseEntity.ok("{}");
