@@ -2,7 +2,7 @@ package me.seula.greeny.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.seula.greeny.domain.point.PointEntity;
+import me.seula.greeny.domain.point.entity.PointEntity;
 
 import java.util.List;
 
