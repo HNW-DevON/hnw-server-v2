@@ -23,11 +23,9 @@ public class QuestController {
         임무 전체 조회
     */
     @Operation(summary = "퀘스트 전체 조회", description = "퀘스트 전체 리스트를 반환합니다")
-    @GetMapping("/")
-    public List<QuestEntity> getQuestList(
-            int type,
-            Authentication authentication){
-        return questService.getQuestList(type, authentication);
+    @GetMapping
+    public List<QuestEntity> getQuestList(int type){
+        return questService.getQuestList(type);
     }
 
     /*

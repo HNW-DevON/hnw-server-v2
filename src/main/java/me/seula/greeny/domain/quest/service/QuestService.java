@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.quest.dto.QuestDTO;
 import me.seula.greeny.domain.quest.entity.QuestEntity;
 import me.seula.greeny.domain.quest.repository.QuestRepository;
+import me.seula.greeny.domain.user.entity.UserEntity;
 import me.seula.greeny.domain.user.repository.UserRepository;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +24,12 @@ public class QuestService {
     private final QuestRepository questRepository;
 
     // type = 1 - 성공  | type = 2 - 진행중
-    public List<QuestEntity> getQuestList(int type, Authentication authentication) {
-        int userId = userRepository.findByUsername(authentication.getName())
+    public List<QuestEntity> getQuestList(int type) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        int userId = userRepository.findByUsername(username)
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
                 .getId();
 
