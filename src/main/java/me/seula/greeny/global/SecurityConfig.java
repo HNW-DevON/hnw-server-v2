@@ -1,9 +1,9 @@
 package me.seula.greeny.global;
 
 import lombok.RequiredArgsConstructor;
-import me.seula.greeny.jwt.JwtFilter;
-import me.seula.greeny.jwt.LoginFilter;
-import me.seula.greeny.jwt.JwtUtil;
+import me.seula.greeny.domain.jwt.JwtFilter;
+import me.seula.greeny.domain.jwt.LoginFilter;
+import me.seula.greeny.domain.jwt.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
