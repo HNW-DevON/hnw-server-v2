@@ -27,8 +27,6 @@ public class PointEntity {
 
     /*
         유저 외래키
-
-        근데 이거 외래키 써야됨 ?
     */
     @ManyToOne
     @JoinColumn(nullable = false)
