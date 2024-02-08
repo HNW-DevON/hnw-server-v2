@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.seula.greeny.domain.point.dto.PointDTO;
 import me.seula.greeny.domain.user.entity.UserEntity;
 import org.springframework.data.annotation.CreatedDate;
 
@@ -49,5 +50,9 @@ public class PointEntity {
         this.user = user;
         this.productId = productId;
         this.addedAt = LocalDateTime.now().toLocalDate();
+    }
+
+    public PointDTO toDomain() {
+        return new PointDTO(id, point, productId, addedAt);
     }
 }

@@ -1,5 +1,6 @@
 package me.seula.greeny.domain.user.service;
 
+import me.seula.greeny.domain.point.entity.PointEntity;
 import me.seula.greeny.domain.user.dto.EditDTO;
 import me.seula.greeny.domain.user.dto.ExpDTO;
 import me.seula.greeny.domain.user.dto.RegisterDTO;
@@ -203,7 +204,7 @@ public class UserService {
         userDTO.setUsername(user.getUsername());
         userDTO.setTier(user.getTier());
         userDTO.setBirth(user.getBirth());
-        userDTO.setPointHistory(user.getPointHistory());
+        userDTO.setPointHistory(user.getPointHistory().stream().map(PointEntity::toDomain).toList());
         return userDTO;
     }
 }
