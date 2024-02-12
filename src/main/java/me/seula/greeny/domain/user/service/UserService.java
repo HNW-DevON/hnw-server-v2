@@ -52,6 +52,7 @@ public class UserService {
                         .name(registerDTO.getName())
                         .birth(registerDTO.getBirth())
                         .totalExp(0)
+                        .tier("씨앗 3")
                         .hasPoint(0)
                         .role("ROLE_USER")
                         .build()

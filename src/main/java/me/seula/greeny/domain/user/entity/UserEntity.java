@@ -57,6 +57,7 @@ public class UserEntity {
         사용자 티어
     */
     @Setter
+    @Column(nullable = false)
     private String tier;
 
     /*
@@ -85,6 +86,7 @@ public class UserEntity {
             String name,
             String birth,
             int totalExp,
+            String tier,
             int hasPoint,
             String role)
     {
@@ -93,6 +95,7 @@ public class UserEntity {
         this.name = name;
         this.birth = birth;
         this.totalExp = totalExp;
+        this.tier = tier;
         this.hasPoint = hasPoint;
         this.role = role;
     }
