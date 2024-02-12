@@ -1,6 +1,7 @@
 package me.seula.greeny.domain.find.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.swagger.v3.core.util.Json;
 import jakarta.persistence.EntityNotFoundException;
 import me.seula.greeny.domain.find.repository.FindRepository;
 import me.seula.greeny.domain.user.entity.UserEntity;
@@ -29,6 +30,21 @@ public class FindService {
 
     public List<JsonNode> findDistinctProductIdsByUsernameNot() {
         List<Long> productIdList = findRepository.findDistinctProductId();
+        List<JsonNode> productList = new ArrayList<>();
+
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<String> http = new HttpEntity<>(headers);
+
+        for (Long aLong : productIdList) {
+            JsonNode result = restTemplate.exchange("https://m.retaildb.or.kr/service/product_info/search/" + aLong, HttpMethod.GET, http, JsonNode.class).getBody();
+            productList.add(result);
+        }
+
+        return productList;
+    }
+
+    public List<JsonNode> getDailyProducts() {
+        List<Long> productIdList = findRepository.findRandomDistinctProductID();
         List<JsonNode> productList = new ArrayList<>();
 
         HttpHeaders headers = new HttpHeaders();
