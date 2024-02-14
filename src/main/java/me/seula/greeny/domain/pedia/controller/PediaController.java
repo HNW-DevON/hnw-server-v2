@@ -1,5 +1,6 @@
 package me.seula.greeny.domain.pedia.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class PediaController {
     */
     @Operation(summary = "도감 조회", description = "자신의 도감을 조회합니다")
     @GetMapping
-    public List<PediaEntity> getPedia() {
+    public List<JsonNode> getPedia() {
         return pediaService.getPedia();
     }
 
