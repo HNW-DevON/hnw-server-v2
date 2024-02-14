@@ -10,7 +10,7 @@ public interface FindRepository extends JpaRepository<PediaEntity, Long> {
     @Query("SELECT DISTINCT productId FROM PediaEntity")
     List<Long> findDistinctProductId();
 
-    @Query("SELECT DISTINCT productId from PediaEntity GROUP BY productId ORDER BY RAND() LIMIT 3")
-    List<Long> findRandomDistinctProductID();
+    @Query(value = "SELECT DISTINCT * from PediaEntity ORDER BY RAND() LIMIT 5", nativeQuery = true)
+    List<PediaEntity> findRandomDistinct();
 
 }
