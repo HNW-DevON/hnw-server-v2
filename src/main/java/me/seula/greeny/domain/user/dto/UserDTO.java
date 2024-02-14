@@ -2,7 +2,8 @@ package me.seula.greeny.domain.user.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import me.seula.greeny.domain.point.PointEntity;
+import me.seula.greeny.domain.point.dto.PointDTO;
+import me.seula.greeny.domain.point.entity.PointEntity;
 
 import java.util.List;
 
@@ -18,8 +19,12 @@ public class UserDTO {
 
     private String tier;
 
-    private List<PointEntity> pointHistory;
+    private List<PointDTO> pointHistory;
 
+    private String imagePath;
 
+    private int totalExp;
+
+    private int hasPoint;
 
 }
