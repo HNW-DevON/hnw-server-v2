@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import me.seula.greeny.domain.find.dto.FindDTO;
 import me.seula.greeny.domain.find.service.FindService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class FindController {
 
     @Operation(summary = "오늘의 착한 소비", description = "랜덤으로 제품을 3개 가져옵니다")
     @GetMapping("/daily")
-    public List<JsonNode> getDailyProducts() {
+    public List<FindDTO> getDailyProducts() {
         return findService.getDailyProducts();
     }
 
