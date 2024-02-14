@@ -44,11 +44,6 @@ public class ProductController {
                 userService.updateUserTier();
             }
 
-            /*
-                포인트를 받은 기록이 있는가?
-            */
-            ((ObjectNode) result).put("isGotPoint", pointService.isGotPoint(productId));
-
             return result.toString();
         }
 
