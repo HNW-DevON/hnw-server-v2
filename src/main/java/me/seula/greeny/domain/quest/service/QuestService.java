@@ -5,13 +5,13 @@ import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.quest.dto.QuestDTO;
 import me.seula.greeny.domain.quest.entity.QuestEntity;
 import me.seula.greeny.domain.quest.repository.QuestRepository;
-import me.seula.greeny.domain.user.entity.UserEntity;
 import me.seula.greeny.domain.user.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +41,23 @@ public class QuestService {
         }
 
         return new ArrayList<>();
+    }
+
+    public List<QuestEntity> getQuestListWeekly() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+
+        return questRepository.findByCreatedAtBetween(start, end);
+    }
+
+    public List<QuestEntity> getQuestListNewly() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(3).withHour(0).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+
+        return questRepository.findByCreatedAtBetween(start, end);
+
     }
 
     public QuestEntity getQuest(int questId) {
