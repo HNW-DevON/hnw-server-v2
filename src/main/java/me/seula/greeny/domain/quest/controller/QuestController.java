@@ -40,6 +40,7 @@ public class QuestController {
         새 퀘스트 조회
     */
     @Operation(summary = "새 퀘스트", description = "최근 3일 사이에 생성된 퀘스트를 가져옵니다")
+    @GetMapping("/newly")
     public List<QuestEntity> getQuestListNewly() {
         return questService.getQuestListNewly();
     }
