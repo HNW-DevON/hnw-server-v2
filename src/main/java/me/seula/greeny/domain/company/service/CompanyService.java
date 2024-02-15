@@ -44,4 +44,8 @@ public class CompanyService {
     public List<CompanyEntity> getCompanyListByCategory(String companyCategory) {
         return companyRepository.findByCompanyCategoryContaining(companyCategory);
     }
+
+    public List<CompanyEntity> getCompanyListDaily() {
+        return companyRepository.getCompanyListDaily();
+    }
 }
