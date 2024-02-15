@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +42,14 @@ public class QuestService {
         }
 
         return new ArrayList<>();
+    }
+
+    public List<QuestEntity> getQuestListWeekly() {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime start = now.minusDays(6).withHour(0).withMinute(0).withSecond(0).withNano(0);
+        LocalDateTime end = now.withHour(23).withMinute(59).withSecond(59).withNano(999999999);
+
+        return questRepository.findByCreatedAtBetween(start, end);
     }
 
     public QuestEntity getQuest(int questId) {
