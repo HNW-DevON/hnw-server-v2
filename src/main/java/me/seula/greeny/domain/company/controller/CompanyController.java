@@ -47,6 +47,18 @@ public class CompanyController {
         return "{}";
     }
 
+    /*
+        오늘의 사회적 기업 조회
+    */
+    @Operation(summary = "오늘의 사회적 기업", description = "오늘의 사회적 기업 리스트를 가져옵니다")
+    @GetMapping("/daily")
+    public List<CompanyEntity> getCompanyListDaily() {
+        return companyService.getCompanyListDaily();
+    }
+
+    /*
+        카테고리 별 기업 리스트 조회
+    */
     @Operation(summary = "카테고리 기업 조회", description = "회사를 카테고리로 조회합니다")
     @GetMapping("/category/{categoryName}")
     public List<CompanyEntity> getCompanyListByCategory(@PathVariable("categoryName") String categoryName) {
