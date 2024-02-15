@@ -29,6 +29,15 @@ public class QuestController {
     }
 
     /*
+        이번주의 퀘스트
+    */
+    @Operation(summary = "이번주의 퀘스트", description = "최근 7일 사이에 생성된 퀘스트를 가져옵니다")
+    @GetMapping("/weekly")
+    public List<QuestEntity> getQuestListWeekly() {
+        return questService.getQuestListWeekly();
+    }
+
+    /*
         특정 퀘스트 조회
     */
     @Operation(summary = "특정 퀘스트 조회", description = "특정 퀘스트 정보를 조회합니다")
