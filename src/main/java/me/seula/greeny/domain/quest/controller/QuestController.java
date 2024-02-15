@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.quest.dto.QuestDTO;
 import me.seula.greeny.domain.quest.entity.QuestEntity;
 import me.seula.greeny.domain.quest.service.QuestService;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

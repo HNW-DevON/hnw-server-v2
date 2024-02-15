@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.quest.dto.QuestDTO;
 import me.seula.greeny.domain.quest.entity.QuestEntity;
 import me.seula.greeny.domain.quest.repository.QuestRepository;
-import me.seula.greeny.domain.user.entity.UserEntity;
 import me.seula.greeny.domain.user.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
