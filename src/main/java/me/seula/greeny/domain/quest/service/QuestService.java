@@ -14,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -34,11 +33,12 @@ public class QuestService {
                 .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
                 .getId();
 
+
         if (type == 1){
             return questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
         }
         if (type == 2){
-            return questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
+            return getNotCompletedYet(userId);
         }
 
         return new ArrayList<>();
@@ -90,7 +90,7 @@ public class QuestService {
             questList = questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
         }
         if (type == 2) {
-            questList = questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
+            questList = getNotCompletedYet(userId);
         }
 
         return questList.stream()
@@ -112,5 +112,14 @@ public class QuestService {
                 .questLimit(questDTO.getQuestLimit())
                 .build()
         );
+    }
+
+    public List<QuestEntity> getNotCompletedYet(int userId) {
+        List<QuestEntity> completedQuestList = questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
+        List<QuestEntity> questList = questRepository.findAll();
+
+        questList.removeAll(completedQuestList);
+
+        return questList;
     }
 }
