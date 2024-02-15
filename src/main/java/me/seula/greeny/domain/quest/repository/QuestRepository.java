@@ -11,5 +11,4 @@ public interface QuestRepository extends JpaRepository<QuestEntity, Integer> {
 
     List<QuestEntity> findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(int userId);
 
-    List<QuestEntity> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 }
