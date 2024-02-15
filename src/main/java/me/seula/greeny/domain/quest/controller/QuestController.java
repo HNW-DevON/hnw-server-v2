@@ -28,12 +28,20 @@ public class QuestController {
     }
 
     /*
-        이번주의 퀘스트
+        이번주의 퀘스트 조회
     */
     @Operation(summary = "이번주의 퀘스트", description = "최근 7일 사이에 생성된 퀘스트를 가져옵니다")
     @GetMapping("/weekly")
     public List<QuestEntity> getQuestListWeekly() {
         return questService.getQuestListWeekly();
+    }
+
+    /*
+        새 퀘스트 조회
+    */
+    @Operation(summary = "새 퀘스트", description = "최근 3일 사이에 생성된 퀘스트를 가져옵니다")
+    public List<QuestEntity> getQuestListNewly() {
+        return questService.getQuestListNewly();
     }
 
     /*
