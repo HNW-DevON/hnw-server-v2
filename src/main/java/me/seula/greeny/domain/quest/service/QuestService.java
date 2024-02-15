@@ -63,7 +63,7 @@ public class QuestService {
             questList = questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
         }
         if (type == 2) {
-            questList = questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
+            questList = getQuestListNewly(userId);
         }
 
         return questList.stream()
