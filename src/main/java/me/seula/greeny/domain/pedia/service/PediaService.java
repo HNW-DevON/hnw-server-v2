@@ -62,4 +62,8 @@ public class PediaService {
         return pediaRepository.findByProductIdAndUsername(productId, username).isEmpty();
     }
 
+    public int getCount(String productId) {
+        return pediaRepository.countByProductId(productId);
+    }
+
 }

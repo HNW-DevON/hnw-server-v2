@@ -14,4 +14,6 @@ public interface PediaRepository extends JpaRepository<PediaEntity, Integer> {
     @Query("SELECT p.productId FROM PediaEntity p WHERE p.username = :username")
     List<String> findProductIdByUsername(String username);
 
+    Integer countByProductId(String productId);
+
 }

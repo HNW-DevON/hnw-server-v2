@@ -1,12 +1,15 @@
 package me.seula.greeny.domain.product.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import me.seula.greeny.domain.pedia.service.PediaService;
 import me.seula.greeny.domain.point.service.PointService;
+import me.seula.greeny.domain.product.dto.ProductDTO;
 import me.seula.greeny.domain.user.service.UserService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -23,7 +26,6 @@ import java.util.Objects;
 public class ProductController {
 
     private final PediaService pediaService;
-    private final PointService pointService;
     private final UserService userService;
     private final RestTemplate restTemplate;
 
@@ -32,10 +34,12 @@ public class ProductController {
     */
     @Operation(summary = "제품 인식 (조회)", description = "제품 정보를 반환합니다 (도감 등록)")
     @GetMapping("/{productId}")
-    public String getProduct(@PathVariable("productId") String productId) {
+    public String getProduct(@PathVariable("productId") String productId) throws JsonProcessingException {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> http = new HttpEntity<>(headers);
         JsonNode result = restTemplate.exchange("https://m.retaildb.or.kr/service/product_info/search/" + productId, HttpMethod.GET, http, JsonNode.class).getBody();
+
+        ObjectMapper objectMapper = new ObjectMapper();
 
         if (Objects.requireNonNull(result).get("code").asText().equals("null")) {
             if (pediaService.isExist(productId)) {
@@ -44,7 +48,12 @@ public class ProductController {
                 userService.updateUserTier();
             }
 
-            return result.toString();
+            ProductDTO productDTO = new ProductDTO();
+
+            productDTO.setCount(pediaService.getCount(productId));
+            productDTO.setProduct(result);
+
+            return objectMapper.writeValueAsString(productDTO);
         }
 
         return "{}";
