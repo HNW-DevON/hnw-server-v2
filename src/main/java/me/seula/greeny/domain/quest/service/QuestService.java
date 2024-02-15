@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -43,21 +44,58 @@ public class QuestService {
         return new ArrayList<>();
     }
 
-    public List<QuestEntity> getQuestListWeekly() {
+    public List<QuestEntity> getQuestListWeekly(int type) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        int userId = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
+                .getId();
+
+        List<QuestEntity> questList = new ArrayList<>();
+
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.minusDays(7).withHour(0).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = now.withHour(23).withMinute(59).withSecond(59).withNano(999999999);
 
-        return questRepository.findByCreatedAtBetween(start, end);
+        if (type == 1) {
+            questList = questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
+        }
+        if (type == 2) {
+            questList = questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
+        }
+
+        return questList.stream()
+                .filter(quest -> quest.getCreatedAt().isAfter(start) && quest.getCreatedAt().isBefore(end))
+                .toList();
     }
 
-    public List<QuestEntity> getQuestListNewly() {
+    public List<QuestEntity> getQuestListNewly(int type) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String username = auth.getName();
+
+        int userId = userRepository.findByUsername(username)
+                .orElseThrow(() -> new EntityNotFoundException("User Entity Not Found"))
+                .getId();
+
+        List<QuestEntity> questList = new ArrayList<>();
+
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime start = now.minusDays(3).withHour(0).withMinute(0).withSecond(0).withNano(0);
         LocalDateTime end = now.withHour(23).withMinute(59).withSecond(59).withNano(999999999);
 
-        return questRepository.findByCreatedAtBetween(start, end);
+        if (type == 1) {
+            questList = questRepository.findByQuestCompleteEntityListCompleteUserId(userId);
+        }
+        if (type == 2) {
+            questList = questRepository.findByQuestCompleteEntityListCompleteUserIdIsNullOrQuestCompleteEntityListCompleteUserIdNot(userId);
+        }
 
+        return questList.stream()
+                .filter(quest -> quest.getCreatedAt().isAfter(start) && quest.getCreatedAt().isBefore(end))
+                .toList();
     }
 
     public QuestEntity getQuest(int questId) {
